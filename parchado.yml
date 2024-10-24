@@ -1,11 +1,14 @@
 ---
 - name: Actualizar
-  ansible.builtin.dnf:
-    name: "*"
-    state: latest
-  register: salida_dnf
-- name: reiniciar
-  ansible.builtin.reboot:
-  where: salida_dnf is change
+  hosts: web
+  tastks: 
+    - name: Actualizar 
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+      register: salida_dnf
+    - name: reiniciar
+      ansible.builtin.reboot:
+      where: salida_dnf is change
 
   
