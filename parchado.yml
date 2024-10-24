@@ -1,6 +1,6 @@
 ---
 - name: Tareas Implementacion
-  hosts: linux
+  hosts: web
   tasks:
 
     - name: Crear archivo para almacenar resultados de las tareas Posteriores
