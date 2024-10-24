@@ -17,8 +17,8 @@
       register: kernel
     
     - name: Mostrar la validación del kernel
-        debug:
-          msg: "La validación del kernel es {{ kernel.stdout }}"
+      debug:
+            msg: "La validación del kernel es {{ kernel.stdout }}"
     
     - name: Guardar resultado de validación del kernel
       lineinfile:
