@@ -5,7 +5,7 @@
     state: latest
   register: salida_dnf
 - name: reiniciar
-  ansible.nuiltin.reboot:
+  ansible.builtin.reboot:
   where: salida_dnf is change
 
   
