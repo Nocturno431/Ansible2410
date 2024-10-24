@@ -36,7 +36,7 @@
     
     - name: Mostrar fecha de ultimo reinicio
       debug:
-      msg: "La fecha de ultimo reinicio es {{ uptime.stdout }}"
+        msg: "La fecha de ultimo reinicio es {{ uptime.stdout }}"
         
     - name: Guardar resultado de validación de fecha de ultimo reinicio
       lineinfile:
@@ -62,7 +62,7 @@
 
     - name: Mostrar instalación de parches de seguridad 
       debug:
-      msg: "La instalacion de parches de seguridad es {{ updateSecurity.stdout }}"
+        msg: "La instalacion de parches de seguridad es {{ updateSecurity.stdout }}"
     
     - name: Guardar resultado de instalación de parches de seguridad
       lineinfile:
