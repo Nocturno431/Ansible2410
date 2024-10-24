@@ -10,44 +10,44 @@
     
     #Tareas Previas || Validacion de Kernel
         
-     - name: Validacion de Kernel
-       shell: |
+    - name: Validacion de Kernel
+      shell: |
          echo "Validacion de Kernel"
          uname -a
-       register: kernel
+      register: kernel
     
-      - name: Mostrar la validación del kernel
+    - name: Mostrar la validación del kernel
         debug:
           msg: "La validación del kernel es {{ kernel.stdout }}"
     
-      - name: Guardar resultado de validación del kernel
-        lineinfile:
-            line: "{{ kernel.stdout }}"
-            dest: /tmp/parchado/tareas_previas.txt
-            insertafter: EOF
+    - name: Guardar resultado de validación del kernel
+      lineinfile:
+              line: "{{ kernel.stdout }}"
+              dest: /tmp/parchado/tareas_previas.txt
+              insertafter: EOF
     
     #Tareas Previas || Validar fecha de ultimo reinicio
         
-      - name: Validar fecha de ultimo reinicio
-          shell: |
+    - name: Validar fecha de ultimo reinicio
+      shell: |
            echo "Validar fecha de ultimo reinicio"
            uptime
-          register: uptime
+      register: uptime
     
-      - name: Mostrar fecha de ultimo reinicio
-          debug:
-            msg: "La fecha de ultimo reinicio es {{ uptime.stdout }}"
+    - name: Mostrar fecha de ultimo reinicio
+      debug:
+      msg: "La fecha de ultimo reinicio es {{ uptime.stdout }}"
         
-      - name: Guardar resultado de validación de fecha de ultimo reinicio
-          lineinfile:
+    - name: Guardar resultado de validación de fecha de ultimo reinicio
+      lineinfile:
             line: "{{ uptime.stdout }}"
             dest: /tmp/parchado/tareas_previas.txt
             insertafter: EOF
 
-- name: Crear archivo para almacenar resultados de las tareas de Implementacion
+    - name: Crear archivo para almacenar resultados de las tareas de Implementacion
       file:
-        path: /tmp/parchado/tareas_implementacion.txt
-        state: touch
+            path: /tmp/parchado/tareas_implementacion.txt
+            state: touch
 
 #Tareas Previas ||  Ejecutar instalación de parches de seguridad 
 
@@ -62,7 +62,7 @@
 
     - name: Mostrar instalación de parches de seguridad 
       debug:
-        msg: "La instalacion de parches de seguridad es {{ updateSecurity.stdout }}"
+      msg: "La instalacion de parches de seguridad es {{ updateSecurity.stdout }}"
     
     - name: Guardar resultado de instalación de parches de seguridad
       lineinfile:
