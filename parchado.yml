@@ -1,8 +1,7 @@
 ---
 - name: Un playbook muy muy sencillo
-  # A quienes se les va a operar 
-  become: yes
   hosts: web
+  become: yes
   tasks:
 
     - name: Tareas Previas
