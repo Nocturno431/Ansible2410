@@ -1,14 +1,43 @@
 ---
-- name: Actualizar
-  hosts: web
-  tastks: 
-    - name: Actualizar 
-      ansible.builtin.dnf:
-        name: "*"
-        state: latest
-      register: salida_dnf
-    - name: reiniciar
-      ansible.builtin.reboot:
-      where: salida_dnf is change
+- name: Crear archivo para almacenar resultados de las tareas Posteriores
+        file:
+          path: /tmp/parchado/tareas_previas.txt
+          state: touch
+    
+    #Tareas Previas || Validacion de Kernel
+        
+     - name: Validacion de Kernel
+       shell: |
+         echo "Validacion de Kernel"
+         uname -a
+       register: kernel
+    
+      - name: Mostrar la validación del kernel
+        debug:
+          msg: "La validación del kernel es {{ kernel.stdout }}"
+    
+      - name: Guardar resultado de validación del kernel
+        lineinfile:
+            line: "{{ kernel.stdout }}"
+            dest: /tmp/parchado/tareas_previas.txt
+            insertafter: EOF
+    
+    #Tareas Previas || Validar fecha de ultimo reinicio
+        
+      - name: Validar fecha de ultimo reinicio
+          shell: |
+           echo "Validar fecha de ultimo reinicio"
+           uptime
+          register: uptime
+    
+      - name: Mostrar fecha de ultimo reinicio
+          debug:
+            msg: "La fecha de ultimo reinicio es {{ uptime.stdout }}"
+        
+      - name: Guardar resultado de validación de fecha de ultimo reinicio
+          lineinfile:
+            line: "{{ uptime.stdout }}"
+            dest: /tmp/parchado/tareas_previas.txt
+            insertafter: EOF
 
   
