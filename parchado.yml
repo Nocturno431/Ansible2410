@@ -53,9 +53,7 @@
 
     - name: Ejecutar instalacion de parches de seguridad 
       shell: |
-        
         echo " Ejecutando instalacion de parches de seguridad"
-        
         sudo yum update --security -y
         yum update-minimal --security -y
       register: updateSecurity
