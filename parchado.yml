@@ -4,9 +4,9 @@
   tasks:
 
     - name: Crear archivo para almacenar resultados de las tareas Posteriores
-        file:
-          path: /tmp/parchado/tareas_previas.txt
-          state: touch
+      file:
+        path: /tmp/parchado/tareas_previas.txt
+        state: touch
     
     #Tareas Previas || Validacion de Kernel
         
