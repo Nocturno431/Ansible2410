@@ -1,42 +1,11 @@
 ---
-- name: Un playbook muy muy sencillo
-  hosts: web
-  become: yes
-  tasks:
+- name: Actualizar
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+  register: salida_dnf
+- name: reiniciar
+  ansible.nuiltin.reboot:
+  where: salida_dnf is change
 
-    - name: Tareas Previas
-      hosts: linux
-      become: yes
-      gather_facts: True
-      tasks:
-    
-    # Requisitos previos
-    
-    - name: Crear directorio temporal para almacenar resultados del parchado
-        file:
-          path: /tmp/parchado
-          state: directory
-    
-- name: Crear archivo para almacenar resultados de las tareas de Implementacion
-      file:
-        path: /tmp/parchado/tareas_implementacion.txt
-        state: touch
-
-#Tareas Previas ||  Ejecutar instalación de parches de seguridad 
-
-    - name: Ejecutar instalacion de parches de seguridad 
-      shell: |
-        echo "Ejecutando instalacion de parches de seguridad"
-        sudo yum update --security -y
-        yum update-minimal --security -y
-      register: updateSecurity
-
-    - name: Mostrar instalación de parches de seguridad 
-      debug:
-        msg: "La instalacion de parches de seguridad es {{ updateSecurity.stdout }}"
-    
-    - name: Guardar resultado de instalación de parches de seguridad
-      lineinfile:
-        line: "{{ updateSecurity.stdout }}"
-        dest: /tmp/parchado/tareas_implementacion.txt
-        insertafter: EOF
+  
